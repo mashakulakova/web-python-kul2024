@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="w-75 mx-auto mt-3">
+        <h1 class="text-center">{{ post.title }}</h1>
+        <p class="my-4">{{ post.author }}</p>
+        <p class="my-2">{{ post.date }}</p>
+        <img src="{{ url_for('static', filename='images/' + post.image_id) }}" alt="Post image" class="mw-100 my-3">
+        <p class="my-4 text-wrap text-break">{{ post.text }}</p>
+        <div class="modal-content flex-column">
+            <div class="header">
+                <h5 class="my-2 text-success text-center">Оставьте комментарий</h5>
+            </div>
+            <div class="body">
+                <form>
+                    <textarea name="comments" id="comment"  style= "width: 100%" class="mw-100 my-0"></textarea>
+                </form>
+            </div>
+            <div class="footer my-2 text-center">
+                <button type="button" class="btn btn-success my-0">Отправить</button>
+            </div>
+        </div>
+        {% for comment in post.comments %}
+            <div class="comment-block">
+                <img src="{{url_for('static', filename='images/' + 'pic.jpg')}}" style="width: 50px; height: 50px" class="pic" alt="pic">
+                <div>
+                    <p class="comment"><strong>{{ comment.author }}</strong></p>
+                    <p class="comment">{{ comment.text }}</p>
+                </div>
+                
+                {% if comment.replies %}
+                    <div class="reply-block">
+                        {% for reply in comment.replies %}
+                            <img src="{{url_for('static', filename='images/' + 'pic.jpg')}}" style="width: 40px; height: 40px" class="pic" alt="pic">
+                            <p class="comment"><strong>{{ reply.author }}:</strong> {{ reply.text }}</p>
+                            <div>
+                                <img src="{{url_for('static', filename='images/' + 'pic.jpg')}}" style="width: 40px; height: 40px" class="pic" alt="pic">
+                                <p class="comment"><strong>{{ comment.author }}</strong></p>
+                                <p class="comment">{{ comment.text }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

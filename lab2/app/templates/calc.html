@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <h1>Калькулятор</h1>
+        <form>
+            <div class="mb-3 d-flex">
+                <input name="num1" type="calc" class="form-control" id="exampleInputCalc1" placeholder="первая переменная">
+              <select name="operation" class="form-select" aria-label="Default select example">
+                <option selected>Выбрать действие</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+              </select>
+              <input name="num2" type="calc" class="form-control" id="exampleInputCalc2" placeholder="Вторая переменная">
+              <button type="submit" class="btn btn-primary">=</button>
+              {% if result%}
+              <input name="num2" type="calc" class="form-control" id="exampleInputCalc2" value={{result}} disabled>
+              {% endif %}
+            </div>
+           
+          </form>
+        
+
+    </div>
+{% endblock %}

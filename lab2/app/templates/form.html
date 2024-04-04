@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <h1>Форма</h1>
+        <form method = "POST">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email адрес</label>
+              <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+              <div id="emailHelp" class="form-text">Мы никогда не поделимся вашим email с кем-то ещё.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Пароль</label>
+              <input name="password" type="password" class="form-control" id="exampleInputPassword1" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+          </form>
+        
+        {% if request.method == "POST" %}
+            <table class="table">
+            {% for key, value in request.form.items()%}
+            <tr>
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+            </tr>
+            {% endfor%}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
