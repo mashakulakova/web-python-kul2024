@@ -70,7 +70,7 @@ def login():
                 param_url = request.args.get('next')
                 flash('Вы успешно вошли', 'success')
                 return redirect(param_url or url_for('index'))
-    flash('Вы не успешно вошли', 'danger')
+            flash('Авторизация не пройдена', 'danger')
     return render_template('login.html' )
 
 @app.route('/logout', methods = ['GET'])

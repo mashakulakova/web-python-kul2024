@@ -34,9 +34,10 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav ms-auto">
                 {% if current_user.is_authenticated%}
-                  <a class="nav-link" href="{{url_for('logout')}}">Выход</a>
+                  <a class="nav-link" href="{{url_for('change')}}">Сменить пароль</a>
                   <a class="nav-link" href="{{url_for('show_users')}}">Список пользователей</a>
                   <a class="nav-link" href="{{url_for('create')}}">Создать</a>
+                  <a class="nav-link" href="{{url_for('logout')}}">Выход</a>
                 {% else %}
                   <a  class="nav-link" href="{{url_for('login')}}">Вход</a>
                 {% endif %}
@@ -58,12 +59,13 @@
 
     <main>{% block content%} 
       {% endblock %}</main>
-    <footer>
-      <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"
-      ></script>
+    <footer class="bg-body-tertiary fixed-bottom text-lg-start">
+      <div class="p-1 text-dark text-center">Кулакова Маша 221-351</div>
     </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

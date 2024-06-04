@@ -1,31 +1,8 @@
 {% extends "base.html" %}
+{% from '/users/form.html' import form_user %}
 {% block content %}
     <div class="container">
         <h1>Создание пользователя</h1>
-        <form method = "POST">
-            <div class="mb-3">
-              <label for="login" class="form-label">Логин</label>
-              <input name="login" type="login" class="form-control" id="login" aria-describedby="loginHelp" required>
-            </div>
-            <div class="mb-3">
-                <label for="last_name" class="form-label">Фамилия</label>
-                <input name="last_name" type="login" class="form-control" id="last_name" aria-describedby="loginHelp" required>
-            </div>
-            <div class="mb-3">
-                <label for="first_name" class="form-label">Имя</label>
-                <input name="first_name" type="login" class="form-control" id="first_name" aria-describedby="loginHelp" required>
-            </div>
-            <div class="mb-3">
-                <label for="middle_name" class="form-label">Отчество</label>
-                <input name="middle_name" type="login" class="form-control" id="middle_name" aria-describedby="loginHelp">
-            </div>
-
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Пароль</label>
-              <input name="password" type="password" class="form-control" id="exampleInputPassword1" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Создать</button>
-          </form>
-        
+      {{form_user('', roles, l_class, l_message_class, l_message, p_class, p_message_class, p_message, ln_class, ln_message_class, ln_message, fn_class, fn_message_class, fn_message)}}
     </div>
 {% endblock %}
