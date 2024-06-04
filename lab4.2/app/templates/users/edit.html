@@ -1,0 +1,7 @@
+{% extends "base.html" %} {% block content %}
+{% from '/users/form.html' import form_user %}
+<div class="container">
+  <h1>Редактирование пользователя</h1>
+  {{form_user(user, roles, l_class, l_message_class, l_message, p_class, p_message_class, p_message, ln_class, ln_message_class, ln_message, fn_class, fn_message_class, fn_message)}}
+</div>
+{% endblock %}

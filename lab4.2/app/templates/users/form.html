@@ -1,0 +1,93 @@
+{% macro form_user(user, roles, l_class=None, l_message_class=None, l_message=None, p_class=None, p_message_class=None, p_message=None, ln_class=None, ln_message_class=None, ln_message=None, fn_class=None, fn_message_class=None, fn_message=None)%}
+<form method="POST">
+  {% if request.endpoint == 'create'%}
+  <div class="mb-3">
+    <label for="login" class="form-label">Логин</label>
+    <input
+      name="login"
+      type="login"
+      class="form-control {{ l_class }}"
+      id="login"
+      aria-describedby="loginHelp"
+      
+      value={% if user.login %}{{ user.login }}{% else %}""{% endif %} />
+    {% if l_class %}
+    <div id="loginHelp" class="{{ l_message_class }}">
+      {{ l_message }}
+    </div>
+    {% endif %}
+  </div>
+  <div class="mb-3">
+    <label for="password1" class="form-label">Пароль</label>
+    <input
+      name="oldpassword"
+      type="password"
+      class="form-control {{ p_class }}"
+      aria-describedby="pHelp"
+      id="oldpassword"
+      value={% if user.password %}{{ user.password }}{% else %}""{% endif %}
+      
+    />
+    {% if p_class %}
+    <div id="pHelp" class="{{ p_message_class }}">
+      {{ p_message }}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+  <div class="mb-3">
+    <label for="last_name" class="form-label">Фамилия</label>
+    <input
+      name="last_name"
+      type="login"
+      class="form-control {{ ln_class }}"
+      id="last_name"
+      aria-describedby="lnHelp"
+      value={% if user.last_name %}{{ user.last_name }}{% else %}""{% endif %}
+    />
+    {% if ln_class %}
+    <div id="lnHelp" class="{{ ln_message_class }}">
+      {{ ln_message }}
+    </div>
+    {% endif %}
+  </div>
+  <div class="mb-3">
+    <label for="first_name" class="form-label">Имя</label>
+    <input
+      name="first_name"
+      type="login"
+      class="form-control {{ fn_class }}"
+      id="first_name"
+      aria-describedby="fnHelp"
+      value={% if user.first_name %}{{ user.first_name }}{% else %}""{% endif %}
+      
+    />
+    {% if fn_class %}
+    <div id="fnHelp" class="{{ fn_message_class }}">
+      {{ fn_message }}
+    </div>
+    {% endif %}
+  </div>
+  <div class="mb-3">
+    <label for="middle_name" class="form-label">Отчество</label>
+    <input
+      name="middle_name"
+      type="login"
+      class="form-control"
+      id="middle_name"
+      value={% if user.middle_name %}{{ user.middle_name }}{% else %}""{% endif %}
+      aria-describedby="loginHelp"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="selroles" class="form-label">Роль</label>
+    <select class="form-select" aria-label="Default select example" id="selroles" name="role_id">
+      <option selected>Не выбрано</option>
+      {% for role in roles %}
+        <option value="{{role.id}}">{{role.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+{% endmacro %}
