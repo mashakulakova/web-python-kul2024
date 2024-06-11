@@ -5,7 +5,8 @@ from flask import g
 class MySQL:
     def __init__(self,app):
         self.app = app
-    
+        self.app.teardown_appcontext(self.close_connection)
+        
     def connection(self):
         if 'db' not in g:
             g.db = mysql.connector.connect(**self.config())

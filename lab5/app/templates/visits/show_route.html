@@ -1,0 +1,23 @@
+{% extends 'visits/base.html' %}
+{% from '/pagination.html' import pagination %}
+{% block tabs %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Path</th>
+        <th scope="col">Count</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for val in values %}
+      <tr>
+        <td>{{ val.path }}</td>
+        <td>{{ val.count_path }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {{pagination(count, page)}}
+  <a class="btn btn-primary" href="{{url_for('visit.send_csv')}}">Export CSV</a>
+{% endblock %}

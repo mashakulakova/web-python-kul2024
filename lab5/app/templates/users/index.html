@@ -9,6 +9,7 @@
                 <th scope="col">Имя</th>
                 <th scope="col">Фамилия</th>
                 <th scope="col">Отчество</th>
+                <th scope="col">Роль</th>
                 <th scope="col">Действия</th>
               </tr>
             </thead>
@@ -24,13 +25,128 @@
                   {% endif %}
                 </td>
                 <td>
-                  <button type="button" class="btn btn-dark">Просмотр</button>
-                  <button type="button" class="btn btn-dark">Редактировать</button>
-                  <button type="button" class="btn btn-danger">Удалить</button>
+                  {% if user.role_name %}
+                    {{user.role_name}}
+                  {% endif %}
                 </td>
+                <td>
+                  {% if current_user.can('show',user) %}
+                    <a class="btn btn-dark" href="{{url_for('show_user', user_id=user.id)}}">Просмотр</a>
+                  {% endif %}
+                  {% if current_user.can('edit',user) %}
+                    <a class="btn btn-dark" href="{{url_for('edit', user_id=user.id)}}">Редактирование</a>
+                  {% endif %}
+                  <style>
+                    #modal-dialog {
+  max-width: 100vw;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: radial-gradient(#203462 2px, transparent 2px);
+  background-size: calc(10 * 2px) calc(10 * 2px);
+}
+
+.modal-content {
+  background: #a4363e;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 5px 6px 0px -2px #620d15, -6px 5px 0px -2px #620d15,
+    0px -2px 0px 2px #ee9191, 0px 10px 0px 0px #610c14,
+    0px -10px 0px 1px #e66565, 0px 0px 180px 90px #0d2f66;
+  width: 640px;
+}
+
+.content {
+  font-family: "Skranji", cursive;
+  background: radial-gradient(#fffbf3, #ffe19e);
+  padding: 24px;
+  box-sizing: border-box;
+  border-radius: 20px 18px 20px 18px;
+  box-shadow: 0px 0px 0px 6px #5e1e21, 0px 0px 8px 6px #84222b,
+    inset 0px 0px 15px 0px #614506, 6px 6px 1px 1px #e66565,
+    -6px 6px 1px 1px #e66565;
+  text-align: center;
+
+  p {
+    font-size: 56px;
+    padding: 40px;
+    box-sizing: border-box;
+    color: #461417;
+  }
+}
+
+.modal-footer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+  gap: 30px;
+  box-sizing: border-box;
+
+  a {
+    padding: 20px;
+    flex: 1;
+    border-radius: 20px;
+    border: 2px solid #49181e;
+    font-family: "Skranji", cursive;
+    color: #fff;
+    font-size: 32px;
+    text-shadow: 1px 2px 3px #000000;
+    cursor: pointer;
+
+    &.btn1 {
+      background: linear-gradient(#ced869, #536d1b);
+      box-shadow: 0px 0px 0px 4px #7e1522, 0px 2px 0px 3px #e66565;
+      text-decoration: none;
+      &:hover {
+      box-shadow: 0px 0px 0px 4px #7e1522, 0px 2px 0px 3px #e66565,
+        inset 2px 2px 10px 3px #4e6217;
+      } 
+    }
+
+    &.btn2 {
+      background: linear-gradient(#ea7079, #891a1a);
+      box-shadow: 0px 0px 0px 4px #7e1522, 0px 2px 0px 3px #e66565;
+      text-decoration: none;
+      &:hover {
+      box-shadow: 0px 0px 0px 4px #7e1522, 0px 2px 0px 3px #e66565,
+        inset 2px 2px 10px 3px #822828;
+      }
+    }
+  }
+}
+
+                  </style>
+                  {% if current_user.can('delete',user) %}
+                    <a class="btn btn-danger delete" data-bs-toggle="modal" data-bs-target="#deleteModal_{{user.id}}">Удалить</a>
+                  {% endif %}
+                  <div class="modal fade" id="deleteModal_{{user.id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!---div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Удаление пользователя</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div!--->
+                            <div class="content">
+                              <p>Вы уверены, что хотите удалить пользователя {{user.last_name}} {{user.first_name}}?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a type="button" class="btn1" href="{{url_for('delete', user_id=user.id)}}">Да</a>
+                                <a type="button" class="btn2" data-bs-dismiss="modal">Нет</a>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </td>                
               </tr>
               {% endfor %}
             </tbody>
-          </table>
+        </table>
     </div>
 {% endblock %}

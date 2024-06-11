@@ -34,7 +34,7 @@ def password_validation(password: str) -> str:
     re6 = re.compile(r'''^(?=.*?[-~!?@#$%^&*_+()\[\]{}><\/\\|"'.,:;]{0,}).*$''')
     error = []
     if not re1.match(password):
-        error.append("не менее 8 символов")
+        error.append("Пароль должен быть длиной не менее 8 символов")
     if not re2.match(password):
         error.append("не более 128 символов")
     if not re3.match(password):
