@@ -19,5 +19,5 @@
     </tbody>
   </table>
   {{pagination(count, page)}}
-  <a class="btn btn-primary" href="{{url_for('visit.send_csv')}}">Export CSV</a>
+  <a class="btn btn-primary" href="{{url_for('visit.send_csv_pages')}}?from=show_route">Export CSV</a>
 {% endblock %}
